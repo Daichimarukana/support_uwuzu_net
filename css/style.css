@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&family=BIZ+UDPGothic:wght@400;700&family=Inter:wght@100..900&display=swap');
+body{
+    margin: 0px;
+    width: 100%;
+    height: fit-content;
+    background-color: #F7F7F7;
+}
+.top{
+    width: 100%;
+    margin: 0px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFC832;
+    border-radius: 0px 0px 15px 15px;
+}
+.top .left{
+    margin-left: 0px;
+    display: flex;
+}
+.top .left img{
+    width: 48px;
+    height: 48px;
+    margin: 8px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.top .left a{
+    display: block;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 48px;
+    height: fit-content;
+    width: fit-content;
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    margin: 8px 0px;
+    color: #FFFFFF;
+}
+.top .right{
+    margin-right: 0px;
+    display: flex;
+}
+.top .right .searchbox{
+    width: 200px;
+    height: 28px;
+    margin: 16px;
+    border-radius: 25px;
+    padding-left: 8px;
+    border: solid 1px #FFFFFF;
+    outline: none;
+}
+main{
+    margin: 0px auto;
+    width: 1080px;
+}
+main h1{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 48px;
+}
+main p{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: normal;
+    color: #252525;
+    font-size: 16px;
+}
+main .contents{
+    margin-top: 32px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: fit-content;
+    flex-wrap: wrap;
+}
+main .contents .items{
+    cursor: pointer;
+    width: calc(50% - 40px);
+    height: fit-content;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: all 250ms ease-out;
+}
+main .contents .items:hover{
+    box-shadow: 0 0px 48px 0 rgba(0, 0, 0, .05);
+}
+main .contents .items h1{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 24px;
+    margin: 4px 0px;
+}
+main .contents .items p{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: normal;
+    color: #252525;
+    font-size: 14px;
+    margin: 4px 0px;
+}
+main .contents .items .date{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 12px;
+}
+main .article{
+    width: 100%;
+    height: fit-content;
+}
+main .article .date{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 16px;
+}
+main .article h1{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 48px;
+}
+main .article h2{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 32px;
+}
+main .article h3{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: bold;
+    color: #252525;
+    font-size: 24px;
+}
+main .article p{
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: normal;
+    color: #252525;
+    font-size: 16px;
+}
+main .article table{
+    margin: 16px 0px;
+    width: calc(fit-content + 128px);
+    border: none;
+    border-collapse: collapse;
+}
+main .article td, th {
+    padding: 4px 16px;
+    border: solid 1px #252525;
+}
+main .article pre{
+    width: 100%;
+    height: fit-content;
+    background-color: #252525;
+    padding: 16px;
+    border-radius: 15px;
+    color: #F7F7F7;
+    font-family: "BIZ UDGothic", sans-serif;
+}
+
+.error {
+    position: absolute;
+    animation: slideDown 5.0s ease-in-out forwards;
+    margin-top: 32px;
+    margin-right: auto;
+    margin-left: auto;
+    right: 0;
+    left: 0;
+    width: fit-content;
+    height: 32px;
+    z-index: 9999;
+    background-color: #FF4848;
+    border-radius: 20px;
+    box-shadow: 0 0px 48px 0 rgba(0, 0, 0, .15);
+    text-decoration: none;
+}
+.error p{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 12px;
+    margin-right: 12px;
+    line-height: 24px;
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-size: 16px;
+    color: #F7F7F7;
+    color: transparent; 
+    text-shadow: 0 0 0 #F7F7F7;
+    text-align: center;
+}
+@keyframes slideDown {
+    0%, 100% { transform: translateY(-40dvh); }
+    20%, 90% { transform: translateY(0px); }
+}
+
+@media screen and (max-width: 1080px) {
+	.top .left a{
+        display: none;
+    }
+    main{
+        margin: 0px auto;
+        width: calc(100% - 32px);
+        overflow-wrap: normal;
+    }
+    main .contents{
+        display: block;
+        height: fit-content;
+    }
+    main .contents .items{
+        width: calc(100% - 32px);
+    }
+    main .article pre{
+        width: calc(100% - 32px);
+        overflow: scroll;
+    }
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ゆずねっとサポート</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div id="error" class="error" style="display:none;">
+        <p>Error</p>
+    </div>
+
+    <div class="top">
+        <div class="left">
+            <img src="img/uwuzu_net_icon.png">
+            <a href="index.html">ゆずねっとサポート</a>
+        </div>
+        <div class="right">
+            <input class="searchbox" type="text" id="searchbox" placeholder="検索">
+        </div>
+    </div>
+
+    <main>
+        <div id="top">
+            <h1>ゆずねっとサポート</h1>
+            <p>ゆずねっとのサポートサイトです。<br>
+                右上の検索欄から検索するか下から記事を選択すると閲覧ができます！</p>
+
+            <div id="contents" class="contents"></div>
+        </div>
+        <div id="docs" style="display: none;">
+
+        </div>
+    </main>
+</body>
+
+<script>
+    function showError(text){
+        $("#error").children("p").text(text);
+        $("#error").show();
+        setTimeout(function(){
+            $("#error").hide();
+        }, 5000);
+    }
+
+    $(document).ready(function() {
+        // グローバル変数としてJSONデータを保持
+        var articlesData;
+
+        // JSONを読み込み、ページにコンテンツを追加
+        $.getJSON('contents.json', function(data) {
+            articlesData = data.articles; // JSONデータを保持
+            $.each(articlesData, function(index, article) {
+                // 記事のHTML要素を作成して追加
+                $('#contents').append(
+                    `<div class="items" id="${article.id}">
+                        <div class="date">${article.date}</div>
+                        <h1>${article.title}</h1>
+                        <p>${article.description}</p>
+                    </div>`
+                );
+            });
+
+            var now_url = window.location.href;
+            var url = new URL(now_url);
+            var data = url.searchParams.get("article");
+
+            if(!(data === null)){
+                var article = articlesData.find(function(a) {
+                    return a.id === data;
+                });
+                if (article) {
+                    $('#docs').html(
+                        `<div class="article">
+                            <h1>${article.title}</h1>
+                            <div class="date">${article.date}</div>
+                            <div class="content">${marked.parse(article.content)}</div>
+                        </div>`
+                    ).show();
+                    $('#top').hide();
+                    history.pushState({ articleId: data }, article.title, `?article=${data}`);
+                } else {
+                    showError("記事が存在しませんでした");
+                }
+            }
+
+            $("#contents").on('click', '.items', function() {
+                var id = $(this).attr("id");
+
+                var article = articlesData.find(function(a) {
+                    return a.id === id;
+                });
+
+                if (article) {
+                    $('#docs').html(
+                        `<div class="article">
+                            <h1>${article.title}</h1>
+                            <div class="date">${article.date}</div>
+                            <div class="content">${marked.parse(article.content)}</div>
+                        </div>`
+                    ).show();
+                    $('#top').hide();
+
+                    history.pushState({ articleId: id }, article.title, `?article=${id}`);
+                } else {
+                    showError("記事が存在しませんでした");
+                }
+            });
+
+            window.addEventListener('popstate', function(event) {
+                if (event.state && event.state.articleId) {
+                    // 特定の記事の状態
+                    var id = event.state.articleId;
+                    var article = articlesData.find(function(a) {
+                        return a.id === id;
+                    });
+
+                    if (article) {
+                        $('#docs').html(
+                            `<div class="article">
+                                <h1>${article.title}</h1>
+                                <div class="date">${article.date}</div>
+                                <div class="content">${marked.parse(article.content)}</div>
+                            </div>`
+                        ).show();
+                        $('#top').hide();
+                    }
+                } else {
+                    $('#docs').hide();
+                    $('#top').show();
+                }
+            });
+
+            // 検索機能
+            $('#searchbox').on('input', function() {
+                var searchText = $(this).val().toLowerCase();
+
+                $('#contents .items').each(function() {
+                    var title = $(this).find('h1').text().toLowerCase();
+                    var description = $(this).find('p').text().toLowerCase();
+
+                    if (title.includes(searchText) || description.includes(searchText)) {
+                        $(this).show(); // マッチする場合は表示
+                    } else {
+                        $(this).hide(); // マッチしない場合は非表示
+                    }
+                });
+            });
+
+        }).fail(function() {
+            showError("記事一覧を取得できませんでした！");
+        });
+    });
+</script>
+
+</html>
