@@ -160,7 +160,19 @@ main .article pre{
     color: #F7F7F7;
     font-family: "BIZ UDGothic", sans-serif;
 }
-
+.link_btn{
+    line-height: 64px;
+    width: fit-content;
+    height: 32px;
+    padding: 8px 16px;
+    background-color: #FFC832;
+    color: #F7F7F7;
+    text-decoration: none;
+    font-family: "Inter", "BIZ UDPGothic", sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    border-radius: 25px;
+}
 .error {
     position: absolute;
     animation: slideDown 5.0s ease-in-out forwards;
