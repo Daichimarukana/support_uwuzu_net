@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import Footer from '../components/footer.astro';
+import Header from '../components/header.astro';
+import "../styles/style.css";
+const { entry } = Astro.props;
+
+// 全記事を取得
+const allDocs = await getCollection("docs");
+const sortedDocs = allDocs.sort((a, b) => {
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
+
+const recentDocs = sortedDocs.slice(0, 3);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<title>ゆずねっとサポート</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<section class="top">
+				<h1>ゆずねっとサポート</h1>
+				<p class="subtitle">support.uwuzu.net</p>
+				<p>
+					ようこそ、<a href="https://uwuzu.net/">ゆずねっと</a
+					>に関するサポートならお任せあれ。<br />
+					ゆずねっとサポートです。
+				</p>
+			</section>
+
+			<section class="recent-posts">
+				<h2>最近追加された記事</h2>
+				{
+					recentDocs.map((doc) => (
+						<a class="post-card" href={`/docs/${doc.slug}`}>
+							<div class="p2">
+								{doc.data.pubDate.toLocaleDateString("ja-JP", {
+									year: "numeric",
+									month: "long",
+									day: "numeric",
+								})}
+							</div>
+							<p class="title">{doc.data.title}</p>
+							<p>
+								{doc.data.description ||
+									"記事の内容はこちらから"}
+							</p>
+						</a>
+					))
+				}
+				<a href="/docs/" class="view_all_btn"
+					>すべての記事を見る</a
+				>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

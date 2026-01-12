@@ -1,0 +1,22 @@
+---
+import Search from "astro-pagefind/components/Search";
+---
+<header class="header" id="header">
+    <div class="view">
+        <a class="logo" href="/">
+            <img
+                src="/public/img/uwuzu_net_logo_cr.png"
+                alt="ゆずねっとのロゴ"
+            />
+            <p>Support</p>
+        </a>
+        <div class="right">
+            <a href="https://uwuzu.net/">ゆずねっと</a>
+            <Search
+                id="search"
+                className="pagefind-ui"
+                uiOptions={{ showImages: false }}
+            />
+        </div>
+    </div>
+</header>

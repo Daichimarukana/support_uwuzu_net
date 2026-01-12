@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import { ClientRouter } from "astro:transitions";
+import "../../styles/style.css";
+import Footer from '../../components/footer.astro';
+import Header from '../../components/header.astro';
+
+export async function getStaticPaths() {
+    const docs = await getCollection("docs");
+    return docs.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const allDocs = await getCollection("docs");
+const sortedNavDocs = allDocs.sort((a, b) => {
+  return a.data.title.localeCompare(b.data.title, 'ja');
+});
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{entry.data.title} | ゆずねっとサポート</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <Header />
+
+        <main>
+            <div class="container">
+                <nav>
+                    <h3>記事一覧</h3>
+                    {
+                        sortedNavDocs.map((doc) => (
+                            <div class="nav_link" transition:animate="fade">
+                                <a
+                                    href={`/docs/${doc.slug}`}
+                                    class={`sidebar-link ${entry.slug === doc.slug ? "active" : ""}`}
+                                >
+                                    {doc.data.title}
+                                </a>
+                            </div>
+                        ))
+                    }
+                </nav>
+
+                <div class="document" data-pagefind-body>
+                    <div class="p2">
+                        {entry.data.pubDate.toLocaleDateString("ja-JP", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })}
+                    </div>
+                    <h1 class="title">{entry.data.title}</h1>
+                    <article>
+                        <Content />
+                    </article>
+                </div>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>
+<ClientRouter />
