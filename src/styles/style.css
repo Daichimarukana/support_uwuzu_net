@@ -34,11 +34,11 @@ header {
     }
 
     20% {
-        border-bottom: solid 1px #CCC;
+        border-bottom: solid 1px #EEE;
     }
 
     100% {
-        border-bottom: solid 1px #CCC;
+        border-bottom: solid 1px #EEE;
     }
 }
 
@@ -103,9 +103,10 @@ header a:hover {
 header .pagefind-ui {
     --pagefind-ui-scale: 0.6;
     --pagefind-ui-primary: #FFC832;
+    --pagefind-ui-background: #F9F9F9;
     --pagefind-ui-text: #252525;
     --pagefind-ui-font-size: 16px;
-    --pagefind-ui-border: #CCC;
+    --pagefind-ui-border: #EEE;
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 50px;
     --pagefind-ui-font: 'Noto Sans JP', sans-serif;
@@ -121,7 +122,9 @@ header .pagefind-ui .pagefind-ui__search-input {
     outline: none;
     transition: all 250ms ease-out;
 }
-
+header .pagefind-ui .pagefind-ui__search-input:focus {
+    background-color: #FFFFFF;
+}
 header .pagefind-ui.yellow {
     --pagefind-ui-background: lightyellow;
 }
@@ -145,7 +148,7 @@ header .pagefind-ui .pagefind-ui__drawer:not(.pagefind-ui__hidden) {
     overflow-y: auto;
     border-radius: 10px;
     border-radius: 10px;
-    border: solid 1px #CCC;
+    border: solid 1px #EEE;
     background-color: var(--pagefind-ui-background);
 }
 
@@ -211,8 +214,9 @@ main .post-card {
     text-decoration: none;
     /* 下線を消す */
     color: inherit;
+    background-color: #F9f9f9;
 
-    border: 1px solid #CCC;
+    border: 1px solid #EEE;
     padding: 16px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -221,6 +225,7 @@ main .post-card {
 
 main .post-card:hover {
     background-color: #FFFFFF;
+    border-color: #CCC;
     box-shadow: 0 0px 48px 0 rgba(0, 0, 0, .05);
 }
 
@@ -263,6 +268,15 @@ main .view_all_btn:hover {
     color: #FFF;
 }
 
+main hr {
+    border: none;
+    border-top: 1px solid #CCC;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
 .sidebar-link {
     width: 230px;
     white-space: nowrap;
@@ -296,7 +310,7 @@ main .view_all_btn:hover {
 nav {
     width: 250px;
     padding-right: 20px;
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #EEE;
     min-height: 90dvh;
     height: fit-content;
     position: sticky;
@@ -323,7 +337,7 @@ nav {
 }
 
 .document pre{
-    width: 100%;
+    width: calc(100% - 32px);
     height: fit-content;
     background-color: #252525;
     padding: 16px;
@@ -342,7 +356,7 @@ nav {
 }
 
 .site-footer {
-    border-top: 1px solid #CCC;
+    border-top: 1px solid #EEE;
     padding: 0px 20px 20px 20px;
     margin-top: 60px;
     color: #252525;
